@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://chhb2nm8qtp0s"]
+
+[ext_resource type="ArrayMesh" uid="uid://bffufvfcdlx3j" path="res://assets/lighthouse_OBJ.obj" id="1_1xey5"]
+[ext_resource type="PackedScene" uid="uid://r4xotoeug844" path="res://assets/Cottage_FREE.glb" id="2_kb11y"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="LighthouseObj" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.260596, -2.97518)
+mesh = ExtResource("1_1xey5")
+
+[node name="Cottage_FREE" parent="." instance=ExtResource("2_kb11y")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.6306, 0, 7.96497)
