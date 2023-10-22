@@ -1,7 +1,7 @@
 extends Node3D
 class_name Player
 
-@export var rotation_speed: float = PI / 3
+@export var rotation_speed: float = PI / 5
 
 @onready var raycast: RayCast3D = $Camera3D/RayCast
 
