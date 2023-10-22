@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvcajm7hq0n7v"]
+
+[ext_resource type="Script" path="res://src/scenes/main.gd" id="1_yjw8t"]
+[ext_resource type="PackedScene" uid="uid://dejixlpchetbf" path="res://src/objects/poi_two.tscn" id="2_fm802"]
+[ext_resource type="PackedScene" uid="uid://c3oac3dk5enfy" path="res://src/movement/gateway.tscn" id="4_cg3nw"]
+[ext_resource type="PackedScene" uid="uid://t2jpofj28c67" path="res://src/player/player.tscn" id="5_vxe0i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a4pid"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ddvvw"]
+sky_material = SubResource("ProceduralSkyMaterial_a4pid")
+
+[sub_resource type="Environment" id="Environment_3o81q"]
+background_mode = 2
+sky = SubResource("Sky_ddvvw")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxknx"]
+albedo_color = Color(0.458824, 0.439216, 0.6, 1)
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_l6pca"]
+material = SubResource("StandardMaterial3D_lxknx")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l5f7b"]
+size = Vector3(10, 1, 10)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_yjw8t")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3o81q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.304083, 0.952646, 0, -0.952646, -0.304083, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("5_vxe0i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="POI_Two" parent="." instance=ExtResource("2_fm802")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.94712, 2, -9.16763)
+
+[node name="POI_Two3" parent="." instance=ExtResource("2_fm802")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.89024, 2, 1.17621)
+
+[node name="POI_Two2" parent="." instance=ExtResource("2_fm802")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.14879, 2, -8.67311)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_l6pca")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_l5f7b")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3596, 0, -12.2147)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_l6pca")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_l5f7b")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3633, 0, -10.9411)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_l6pca")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_l5f7b")
+
+[node name="Gateway" parent="." instance=ExtResource("4_cg3nw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24605, 0, -3.51793)
+to_scene = "res://src/scenes/second.tscn"
