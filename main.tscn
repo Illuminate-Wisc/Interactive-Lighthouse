@@ -1,0 +1,235 @@
+[gd_scene load_steps=33 format=3 uid="uid://dgxeusjf4ek3o"]
+
+[ext_resource type="Material" uid="uid://cnl8sxt60gm5p" path="res://materials/grass.tres" id="1_e0lf0"]
+[ext_resource type="Texture2D" uid="uid://cg2qek5hpja45" path="res://TCom_HDRSky342_header4.jpg" id="1_h7uvc"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="2_v02cl"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="3_s0nv3"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="4_iumlr"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_cqdwc"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="6_vb2id"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="7_u2dnj"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="8_ekenp"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="9_qkwx4"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="10_etryx"]
+[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="10_g7btx"]
+[ext_resource type="Shader" path="res://Shaders/Water.gdshader" id="14_i3ml5"]
+[ext_resource type="PackedScene" uid="uid://dnkglhjatd2ww" path="res://Resources/boat.glb" id="14_josmo"]
+[ext_resource type="PackedScene" uid="uid://c8en0o1vb1uib" path="res://Resources/boat_a.glb" id="15_bpph7"]
+[ext_resource type="PackedScene" uid="uid://cvmo22utb5l4j" path="res://Resources/fisher_boat.glb" id="16_imbw7"]
+[ext_resource type="PackedScene" uid="uid://vqlvdwsmfkrv" path="res://Resources/half_life_2_inspired_boat.glb" id="17_u012i"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_yi627"]
+panorama = ExtResource("1_h7uvc")
+
+[sub_resource type="Sky" id="Sky_rl3u6"]
+sky_material = SubResource("PanoramaSkyMaterial_yi627")
+
+[sub_resource type="Environment" id="Environment_gdhl0"]
+background_mode = 2
+sky = SubResource("Sky_rl3u6")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_sky_affect = 0.184
+
+[sub_resource type="Resource" id="Resource_cnhk5"]
+script = ExtResource("4_iumlr")
+amount = 200
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_peyqk"]
+script = ExtResource("5_cqdwc")
+position = Vector3(0.15, 0.15, 0.15)
+rotation = Vector3(20, 360, 5)
+scale = Vector3(0.1, 0.1, 0.1)
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_77747"]
+script = ExtResource("6_vb2id")
+iterations = 3
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+use_computeshader = true
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = true
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_n51y6"]
+script = ExtResource("7_u2dnj")
+ray_direction = Vector3(0, -1, 0)
+ray_length = 5.0
+ray_offset = 5.0
+remove_points_on_miss = false
+align_with_collision_normal = false
+max_slope = 90.0
+collision_mask = 1
+exclude_mask = 0
+enabled = true
+override_global_seed = false
+custom_seed = 0
+restrict_height = false
+reference_frame = 0
+
+[sub_resource type="Resource" id="Resource_0ayf7"]
+script = ExtResource("3_s0nv3")
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_cnhk5"), SubResource("Resource_peyqk"), SubResource("Resource_77747"), SubResource("Resource_n51y6")])
+
+[sub_resource type="Resource" id="Resource_06thr"]
+script = ExtResource("10_g7btx")
+radius = 4.79044
+
+[sub_resource type="Resource" id="Resource_evtd1"]
+script = ExtResource("10_etryx")
+size = Vector3(50, 1, 50)
+
+[sub_resource type="Resource" id="Resource_3byqt"]
+script = ExtResource("10_etryx")
+size = Vector3(36.0435, 1, 5.65428)
+
+[sub_resource type="QuadMesh" id="QuadMesh_y2ik0"]
+size = Vector2(200, 200)
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tcuc4"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t7ubl"]
+seamless = true
+as_normal_map = true
+bump_strength = 10.7
+noise = SubResource("FastNoiseLite_tcuc4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7oc2b"]
+render_priority = 0
+shader = ExtResource("14_i3ml5")
+shader_parameter/albedo = Color(0, 0.301961, 0.454902, 1)
+shader_parameter/albedo2 = Color(0.0431373, 0.278431, 0.529412, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.02
+shader_parameter/wave_direction = Vector2(0.5, -0.2)
+shader_parameter/wave_direction2 = Vector2(-0.5, 0.5)
+shader_parameter/time_scale = 0.1
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/color_deep = Color(0.11, 0.29, 0.33, 1)
+shader_parameter/color_shallow = Color(0, 0.47, 0.76, 1)
+shader_parameter/beers_law = 2.0
+shader_parameter/depth_offset = 1.5
+shader_parameter/edge_scale = 1.0
+shader_parameter/near = 1.0
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_t7ubl")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_t7ubl")
+
+[node name="world" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gdhl0")
+
+[node name="floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 0.0552139, -0.650222, 0.0140834)
+material_override = ExtResource("1_e0lf0")
+use_collision = true
+size = Vector3(50, 1, 50)
+
+[node name="floor2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999992, 0.00396189, 0, -0.00396189, 0.999992, 1.55076, -2.73502, 0.838126)
+material_override = ExtResource("1_e0lf0")
+use_collision = true
+size = Vector3(70, 1, 70)
+
+[node name="floor3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999992, 0.00396189, 0, -0.00396189, 0.999992, -0.061039, -1.83252, 0.45457)
+material_override = ExtResource("1_e0lf0")
+use_collision = true
+size = Vector3(52, 1, 52)
+
+[node name="ProtonScatter" type="Node3D" parent="."]
+script = ExtResource("2_v02cl")
+modifier_stack = SubResource("Resource_0ayf7")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+
+[node name="Bush" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.68584, -0.654339, 2.62875)
+script = ExtResource("8_ekenp")
+path = "res://addons/proton_scatter/demos/assets/bush.tscn"
+
+[node name="Bush2" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 1.68552, 0.318629, 7.07071)
+script = ExtResource("9_qkwx4")
+shape = SubResource("Resource_06thr")
+
+[node name="Grass" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.68584, -0.654339, 2.62875)
+script = ExtResource("8_ekenp")
+proportion = 20
+path = "res://addons/proton_scatter/demos/assets/grass_2.tscn"
+
+[node name="Rock" type="Node3D" parent="ProtonScatter"]
+script = ExtResource("8_ekenp")
+proportion = 10
+path = "res://addons/proton_scatter/demos/assets/small_rock.tscn"
+
+[node name="Tree" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8129, 15.7348, 15.1605)
+script = ExtResource("8_ekenp")
+proportion = 20
+source_scale_multiplier = 0.02
+path = "res://models/coconut_palm.glb"
+
+[node name="GroundDisplay" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, -0.12868, 0.318629, 0.163189)
+script = ExtResource("9_qkwx4")
+shape = SubResource("Resource_evtd1")
+
+[node name="Path" type="Node3D" parent="ProtonScatter"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 14.699, 0.939147, 3.53149)
+script = ExtResource("9_qkwx4")
+negative = true
+shape = SubResource("Resource_3byqt")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.296775, -0.0241145, -0.954643, -6.63141e-10, 0.999681, -0.0252522, 0.954947, -0.00749422, -0.29668, 34.0138, 2.04754, 8.53833)
+
+[node name="WaterPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999993, -0.00382226, 0, 0.00382226, 0.999993, -13.6326, -2.9225, 14.863)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_y2ik0")
+surface_material_override/0 = SubResource("ShaderMaterial_7oc2b")
+
+[node name="boat" parent="." instance=ExtResource("14_josmo")]
+transform = Transform3D(-3.60088, 0.137039, -1.73634, 0.137365, 3.99752, 0.0306296, 1.73632, -0.0320546, -3.60336, 4.9898, -11.6445, 77.896)
+
+[node name="boat2" parent="." instance=ExtResource("14_josmo")]
+transform = Transform3D(-2.02168, 0.0430263, 3.45123, 0.137365, 3.99752, 0.0306296, -3.44876, 0.134, -2.0219, -79.966, -11.5139, -22.4806)
+
+[node name="boat_a" parent="." instance=ExtResource("15_bpph7")]
+transform = Transform3D(3.38927, 0, 2.12435, 0, 4, 0, -2.12435, 0, 3.38927, 58.6887, -4.0193, 28.9509)
+
+[node name="boat_a2" parent="." instance=ExtResource("15_bpph7")]
+transform = Transform3D(-3.26176, 0, -2.31537, 0, 4, 0, 2.31537, 0, -3.26176, 11.8896, -3.4848, -61.561)
+
+[node name="fisher_boat" parent="." instance=ExtResource("16_imbw7")]
+transform = Transform3D(0.0475106, 0, 0.0155802, 0, 0.05, 0, -0.0155802, 0, 0.0475106, -42.7963, -0.529528, 45.9629)
+
+[node name="half_life_2_inspired_boat" parent="." instance=ExtResource("17_u012i")]
+transform = Transform3D(4.62243, 0, -1.90608, 0, 5, 0, 1.90608, 0, 4.62243, 22.5763, -1.2439, -29.4023)
+
+[node name="half_life_2_inspired_boat2" parent="." instance=ExtResource("17_u012i")]
+transform = Transform3D(4.62243, 0, -1.90608, 0, 5, 0, 1.90608, 0, 4.62243, 15.4627, -1.57884, -27.9568)
