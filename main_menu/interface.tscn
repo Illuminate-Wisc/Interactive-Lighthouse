@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://b52t472isl26c"]
+
+[ext_resource type="Script" path="res://main_menu/interface.gd" id="1_20kci"]
+[ext_resource type="Texture2D" uid="uid://dnvjpvua1ib7n" path="res://main_menu/background.png" id="2_ch6de"]
+[ext_resource type="Theme" uid="uid://cd4s3l1payt30" path="res://main_menu/button_theme.tres" id="3_o7m3p"]
+[ext_resource type="PackedScene" uid="uid://cjyxx74ydckc4" path="res://main_menu/settings.tscn" id="4_6n0pq"]
+
+[node name="Interface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_20kci")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(537, 355)
+texture = ExtResource("2_ch6de")
+
+[node name="Main_structure" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Start" type="Button" parent="Main_structure"]
+layout_mode = 2
+offset_left = 452.0
+offset_top = 250.0
+offset_right = 574.0
+offset_bottom = 290.0
+text = "start the game"
+
+[node name="Settings" type="Button" parent="Main_structure"]
+layout_mode = 2
+offset_right = 122.0
+offset_bottom = 40.0
+text = "settings"
+
+[node name="Quit" type="Button" parent="Main_structure"]
+layout_mode = 2
+offset_left = 452.0
+offset_top = 400.0
+offset_right = 574.0
+offset_bottom = 440.0
+theme = ExtResource("3_o7m3p")
+text = "quit"
+
+[node name="Settings" parent="." instance=ExtResource("4_6n0pq")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Main_structure/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Main_structure/Quit" to="." method="_on_quit_button_pressed"]
