@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgn5j6lxsvrky"]
-
-[ext_resource type="PackedScene" path="res://PointsOfInterest/wooden boat/wooden_boat.glb" id="1_0snwd"]
-
-[node name="Node3D" type="Node3D"]
-
-[node name="wooden_boat" parent="." instance=ExtResource("1_0snwd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0175591, 0, 0.895554)
