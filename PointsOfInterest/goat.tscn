@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfu1t2raioxno"]
+
+[ext_resource type="PackedScene" uid="uid://bp7ferhyaq0ch" path="res://PointsOfInterest/goat/goat.glb" id="1_w4x0u"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_72s25"]
+height = 85.4294
+radius = 67.5181
+
+[node name="Node3D" type="Node3D"]
+
+[node name="goat" parent="." instance=ExtResource("1_w4x0u")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.404629, 1.19209e-07, 1.02275)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="goat"]
+transform = Transform3D(9.98111, 0, 0.614318, 0, 10, 0, -0.614318, 0, 9.98111, -92.0998, 254.682, -170.64)
+shape = SubResource("CylinderShape3D_72s25")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvqw4vfd3hgku"]
+
+[ext_resource type="PackedScene" uid="uid://cro3f4xvv1g2a" path="res://PointsOfInterest/flag in the wind/flag_in_the_wind.glb" id="1_4ka8r"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="flag_in_the_wind" parent="." instance=ExtResource("1_4ka8r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.357381, 0, 0.847513)

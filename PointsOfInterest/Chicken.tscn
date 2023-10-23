@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8qy3wfpwvl6w"]
+
+[ext_resource type="PackedScene" uid="uid://cxyhkj0i3v4am" path="res://PointsOfInterest/chicken/source/Chicken.glb" id="1_6f4fm"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69955, -0.497564, -1.16504)
+
+[node name="Chicken" parent="." instance=ExtResource("1_6f4fm")]
+transform = Transform3D(0.998626, 0, 0.0524057, 0, 1, 0, -0.0524057, 0, 0.998626, -2.65998, 0.467709, 0.968426)
